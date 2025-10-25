@@ -1,0 +1,58 @@
+<!--components/comment-item/comment-item.wxml-->
+<view 
+  class="comment-item"
+  bindtap="onCommentTap"
+  bindlongpress="onCommentLongPress"
+>
+  <!-- 用户信息 -->
+  <view class="comment-header">
+    <view class="user-info" bindtap="onAvatarTap">
+      <image 
+        class="user-avatar" 
+        src="{{comment.userInfo.avatarUrl || '/images/default-avatar.png'}}"
+        wx:if="{{showAvatar}}"
+      />
+      <view class="user-details">
+        <text class="user-name">{{comment.userInfo.nickName || '匿名用户'}}</text>
+        <text class="comment-time">{{formattedTime}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 评论内容 -->
+  <view class="comment-content">
+    <text class="comment-text">{{comment.content}}</text>
+  </view>
+
+  <!-- 评论操作 -->
+  <view class="comment-actions" wx:if="{{showActions}}">
+    <view class="action-item" bindtap="onLikeTap">
+      <text class="action-icon {{isLiked ? 'liked' : ''}}">
+        {{isLiked ? '❤️' : '🤍'}}
+      </text>
+      <text class="action-text">{{likeCount}}</text>
+    </view>
+    
+    <view class="action-item" bindtap="onReplyTap">
+      <text class="action-icon">💬</text>
+      <text class="action-text">回复</text>
+    </view>
+  </view>
+
+  <!-- 回复列表 -->
+  <view class="reply-list" wx:if="{{comment.replies && comment.replies.length > 0}}">
+    <view 
+      wx:for="{{comment.replies}}" 
+      wx:key="id"
+      class="reply-item"
+    >
+      <view class="reply-header">
+        <text class="reply-user">{{item.userInfo.nickName || '匿名用户'}}</text>
+        <text class="reply-time">{{item.formattedTime}}</text>
+      </view>
+      <view class="reply-content">
+        <text class="reply-text">{{item.content}}</text>
+      </view>
+    </view>
+  </view>
+</view>

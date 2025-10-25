@@ -1,0 +1,54 @@
+<!--components/news-card/news-card.wxml-->
+<view 
+  class="news-card {{layout}}"
+  bindtap="onCardTap"
+  bindlongpress="onCardLongPress"
+>
+  <!-- 水平布局 -->
+  <view class="card-horizontal" wx:if="{{layout === 'horizontal'}}">
+    <view class="card-content">
+      <view class="news-header">
+        <text class="news-title">{{news.title}}</text>
+        <view class="news-meta">
+          <text class="news-source" wx:if="{{showSource}}">{{news.source}}</text>
+          <text class="news-time" wx:if="{{showTime}}">{{formattedTime}}</text>
+          <text class="news-category tag tag-primary" wx:if="{{showCategory}}">{{news.category}}</text>
+        </view>
+        <text class="news-summary" wx:if="{{news.summary}}">{{news.summary}}</text>
+      </view>
+    </view>
+    <view class="card-image" wx:if="{{news.image}}">
+      <image 
+        src="{{news.image}}" 
+        mode="aspectFill"
+        lazy-load="{{true}}"
+        class="image"
+        bindtap="onImageTap"
+      />
+    </view>
+  </view>
+
+  <!-- 垂直布局 -->
+  <view class="card-vertical" wx:else>
+    <view class="card-image" wx:if="{{news.image}}">
+      <image 
+        src="{{news.image}}" 
+        mode="aspectFill"
+        lazy-load="{{true}}"
+        class="image"
+        bindtap="onImageTap"
+      />
+    </view>
+    <view class="card-content">
+      <view class="news-header">
+        <text class="news-title">{{news.title}}</text>
+        <view class="news-meta">
+          <text class="news-source" wx:if="{{showSource}}">{{news.source}}</text>
+          <text class="news-time" wx:if="{{showTime}}">{{formattedTime}}</text>
+          <text class="news-category tag tag-primary" wx:if="{{showCategory}}">{{news.category}}</text>
+        </view>
+        <text class="news-summary" wx:if="{{news.summary}}">{{news.summary}}</text>
+      </view>
+    </view>
+  </view>
+</view>

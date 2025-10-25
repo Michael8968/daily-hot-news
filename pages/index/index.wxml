@@ -1,0 +1,109 @@
+<!--pages/index/index.wxml-->
+<view class="container {{isDarkMode ? 'dark' : ''}}">
+  <!-- 搜索栏 -->
+  <view class="search-bar">
+    <view class="search-input" wx:if="{{showSearch}}">
+      <input 
+        type="text" 
+        placeholder="搜索新闻..." 
+        value="{{searchKeyword}}"
+        bindinput="onSearchInput"
+        class="search-field"
+      />
+      <view class="search-actions">
+        <text class="btn-clear" bindtap="clearSearch">清除</text>
+        <text class="btn-cancel" bindtap="toggleSearch">取消</text>
+      </view>
+    </view>
+    <view class="search-header" wx:else>
+      <text class="page-title">每日热点新闻</text>
+      <view class="search-icon" bindtap="toggleSearch">
+        <text class="icon-search">🔍</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 轮播图 -->
+  <view class="banner-section" wx:if="{{bannerList.length > 0}}">
+    <swiper 
+      class="banner-swiper" 
+      indicator-dots="{{true}}"
+      autoplay="{{true}}"
+      interval="{{5000}}"
+      duration="{{500}}"
+      circular="{{true}}"
+      bindchange="onBannerTap"
+    >
+      <swiper-item wx:for="{{bannerList}}" wx:key="id">
+        <view class="banner-item" bindtap="onBannerTap" data-index="{{index}}">
+          <image 
+            class="banner-image" 
+            src="{{item.image}}" 
+            mode="aspectFill"
+            lazy-load="{{true}}"
+          />
+          <view class="banner-content">
+            <text class="banner-title">{{item.title}}</text>
+          </view>
+        </view>
+      </swiper-item>
+    </swiper>
+  </view>
+
+  <!-- 分类标签 -->
+  <view class="category-section">
+    <scroll-view class="category-scroll" scroll-x="{{true}}" show-scrollbar="{{false}}">
+      <view class="category-list">
+        <view 
+          wx:for="{{categories}}" 
+          wx:key="id"
+          class="category-item {{currentCategory === item.id ? 'active' : ''}}"
+          bindtap="onCategoryChange"
+          data-category="{{item.id}}"
+        >
+          <text class="category-text">{{item.name}}</text>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 新闻列表 -->
+  <view class="news-section">
+    <!-- 加载状态 -->
+    <view class="loading" wx:if="{{loading && newsList.length === 0}}">
+      <text>加载中...</text>
+    </view>
+
+    <!-- 新闻卡片列表 -->
+    <view class="news-list" wx:elif="{{newsList.length > 0}}">
+      <news-card 
+        wx:for="{{newsList}}" 
+        wx:key="id"
+        news="{{item}}"
+        bindtap="onNewsTap"
+        data-id="{{item.id}}"
+      />
+    </view>
+
+    <!-- 空状态 -->
+    <view class="empty" wx:elif="{{!loading}}">
+      <view class="empty-icon">📰</view>
+      <text class="empty-text">暂无新闻</text>
+    </view>
+
+    <!-- 加载更多 -->
+    <view class="load-more" wx:if="{{newsList.length > 0}}">
+      <view class="loading" wx:if="{{loading}}">
+        <text>加载中...</text>
+      </view>
+      <view class="no-more" wx:elif="{{!hasMore}}">
+        <text>没有更多了</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 刷新提示 -->
+  <view class="refresh-tip" wx:if="{{refreshing}}">
+    <text>正在刷新...</text>
+  </view>
+</view>

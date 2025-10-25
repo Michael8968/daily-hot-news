@@ -1,0 +1,391 @@
+/* pages/profile/profile.wxss */
+.container {
+  background-color: var(--bg-color);
+  min-height: 100vh;
+}
+
+/* 用户信息区域样式 */
+.user-section {
+  background: linear-gradient(135deg, var(--primary-color), #0056b3);
+  padding: 40rpx 30rpx;
+  color: var(--white-color);
+  margin-bottom: 20rpx;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.user-avatar {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  border: 4rpx solid rgba(255, 255, 255, 0.3);
+}
+
+.user-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+}
+
+.user-name {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: var(--white-color);
+}
+
+.user-desc {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.user-actions {
+  display: flex;
+  align-items: center;
+}
+
+.login-prompt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20rpx;
+  padding: 40rpx;
+}
+
+.login-icon {
+  font-size: 120rpx;
+  opacity: 0.8;
+}
+
+.login-text {
+  font-size: 28rpx;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* 统计数据样式 */
+.stats-section {
+  background-color: var(--card-bg);
+  margin: 0 20rpx 20rpx;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  box-shadow: var(--shadow);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20rpx;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10rpx;
+}
+
+.stat-number {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.stat-label {
+  font-size: 24rpx;
+  color: var(--gray-500);
+}
+
+/* 标签切换样式 */
+.tab-section {
+  background-color: var(--card-bg);
+  border-bottom: 1rpx solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.tab-list {
+  display: flex;
+  padding: 0 20rpx;
+}
+
+.tab-item {
+  flex: 1;
+  padding: 30rpx 20rpx;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-bottom: 4rpx solid transparent;
+}
+
+.tab-item.active {
+  border-bottom-color: var(--primary-color);
+  background-color: var(--gray-100);
+}
+
+.tab-item:hover {
+  background-color: var(--gray-100);
+}
+
+.tab-text {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.tab-item.active .tab-text {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+/* 内容区域样式 */
+.content-section {
+  padding: 20rpx;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+.section-action {
+  font-size: 26rpx;
+  color: var(--primary-color);
+  cursor: pointer;
+  padding: 10rpx 20rpx;
+  border-radius: 20rpx;
+  background-color: var(--gray-100);
+  transition: all 0.3s ease;
+}
+
+.section-action:hover {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+}
+
+/* 列表样式 */
+.history-list, .collect-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+/* 设置列表样式 */
+.settings-list {
+  background-color: var(--card-bg);
+  border-radius: 20rpx;
+  margin-bottom: 30rpx;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.setting-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30rpx;
+  border-bottom: 1rpx solid var(--border-color);
+}
+
+.setting-item:last-child {
+  border-bottom: none;
+}
+
+.setting-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.setting-title {
+  font-size: 30rpx;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.setting-desc {
+  font-size: 24rpx;
+  color: var(--gray-500);
+}
+
+.picker-text {
+  font-size: 28rpx;
+  color: var(--primary-color);
+  padding: 10rpx 20rpx;
+  background-color: var(--gray-100);
+  border-radius: 10rpx;
+}
+
+/* 功能列表样式 */
+.function-list {
+  background-color: var(--card-bg);
+  border-radius: 20rpx;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.function-item {
+  display: flex;
+  align-items: center;
+  padding: 30rpx;
+  border-bottom: 1rpx solid var(--border-color);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.function-item:last-child {
+  border-bottom: none;
+}
+
+.function-item:hover {
+  background-color: var(--gray-100);
+}
+
+.function-icon {
+  font-size: 40rpx;
+  margin-right: 20rpx;
+}
+
+.function-title {
+  flex: 1;
+  font-size: 30rpx;
+  color: var(--text-color);
+}
+
+.function-arrow {
+  font-size: 24rpx;
+  color: var(--gray-400);
+}
+
+/* 空状态样式 */
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 120rpx 40rpx;
+  color: var(--gray-500);
+}
+
+.empty-icon {
+  font-size: 120rpx;
+  margin-bottom: 30rpx;
+  opacity: 0.5;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: var(--gray-500);
+}
+
+/* 加载状态样式 */
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 120rpx;
+  color: var(--gray-500);
+  font-size: 28rpx;
+}
+
+.loading::before {
+  content: '';
+  width: 40rpx;
+  height: 40rpx;
+  border: 4rpx solid var(--border-color);
+  border-top: 4rpx solid var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-right: 20rpx;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 响应式样式 */
+@media (max-width: 750rpx) {
+  .user-section {
+    padding: 30rpx 20rpx;
+  }
+  
+  .user-avatar {
+    width: 100rpx;
+    height: 100rpx;
+  }
+  
+  .user-name {
+    font-size: 32rpx;
+  }
+  
+  .stats-grid {
+    gap: 15rpx;
+  }
+  
+  .stat-number {
+    font-size: 36rpx;
+  }
+  
+  .setting-item, .function-item {
+    padding: 25rpx;
+  }
+}
+
+/* 暗黑模式样式 */
+.dark .user-section {
+  background: linear-gradient(135deg, var(--primary-color), #004085);
+}
+
+.dark .stats-section {
+  background-color: var(--card-bg);
+  box-shadow: var(--shadow);
+}
+
+.dark .tab-section {
+  background-color: var(--card-bg);
+  border-bottom-color: var(--border-color);
+}
+
+.dark .tab-item.active {
+  background-color: var(--gray-700);
+}
+
+.dark .tab-item:hover {
+  background-color: var(--gray-700);
+}
+
+.dark .settings-list, .function-list {
+  background-color: var(--card-bg);
+  box-shadow: var(--shadow);
+}
+
+.dark .setting-item, .function-item {
+  border-bottom-color: var(--border-color);
+}
+
+.dark .setting-item:hover, .function-item:hover {
+  background-color: var(--gray-700);
+}
+
+.dark .section-action {
+  background-color: var(--gray-700);
+  color: var(--primary-color);
+}
+
+.dark .section-action:hover {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+}

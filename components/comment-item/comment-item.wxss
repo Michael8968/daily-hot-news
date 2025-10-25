@@ -1,0 +1,344 @@
+/* components/comment-item/comment-item.wxss */
+.comment-item {
+  background-color: var(--card-bg);
+  border-radius: 15rpx;
+  padding: 25rpx;
+  margin-bottom: 20rpx;
+  border: 1rpx solid var(--border-color);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.comment-item:hover {
+  background-color: var(--gray-100);
+  transform: translateY(-2rpx);
+  box-shadow: var(--shadow);
+}
+
+.comment-item:active {
+  background-color: var(--gray-200);
+}
+
+/* 评论头部 */
+.comment-header {
+  margin-bottom: 20rpx;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 15rpx;
+  cursor: pointer;
+}
+
+.user-avatar {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  border: 2rpx solid var(--border-color);
+  flex-shrink: 0;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+  gap: 5rpx;
+}
+
+.user-name {
+  font-size: 26rpx;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.comment-time {
+  font-size: 22rpx;
+  color: var(--gray-500);
+}
+
+/* 评论内容 */
+.comment-content {
+  margin-bottom: 20rpx;
+}
+
+.comment-text {
+  font-size: 28rpx;
+  color: var(--text-color);
+  line-height: 1.6;
+  word-break: break-all;
+}
+
+/* 评论操作 */
+.comment-actions {
+  display: flex;
+  align-items: center;
+  gap: 30rpx;
+  padding-top: 15rpx;
+  border-top: 1rpx solid var(--border-color);
+}
+
+.action-item {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 10rpx 15rpx;
+  border-radius: 20rpx;
+}
+
+.action-item:hover {
+  background-color: var(--gray-100);
+  transform: scale(1.05);
+}
+
+.action-icon {
+  font-size: 24rpx;
+  transition: all 0.3s ease;
+}
+
+.action-icon.liked {
+  color: var(--danger-color);
+  transform: scale(1.2);
+}
+
+.action-text {
+  font-size: 22rpx;
+  color: var(--gray-600);
+}
+
+/* 回复列表 */
+.reply-list {
+  margin-top: 20rpx;
+  padding-top: 20rpx;
+  border-top: 1rpx solid var(--border-color);
+}
+
+.reply-item {
+  background-color: var(--gray-100);
+  border-radius: 10rpx;
+  padding: 20rpx;
+  margin-bottom: 15rpx;
+}
+
+.reply-item:last-child {
+  margin-bottom: 0;
+}
+
+.reply-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10rpx;
+}
+
+.reply-user {
+  font-size: 24rpx;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.reply-time {
+  font-size: 20rpx;
+  color: var(--gray-500);
+}
+
+.reply-content {
+  margin-top: 10rpx;
+}
+
+.reply-text {
+  font-size: 26rpx;
+  color: var(--text-color);
+  line-height: 1.5;
+  word-break: break-all;
+}
+
+/* 响应式样式 */
+@media (max-width: 750rpx) {
+  .comment-item {
+    padding: 20rpx;
+    margin-bottom: 15rpx;
+  }
+  
+  .user-avatar {
+    width: 50rpx;
+    height: 50rpx;
+  }
+  
+  .user-name {
+    font-size: 24rpx;
+  }
+  
+  .comment-time {
+    font-size: 20rpx;
+  }
+  
+  .comment-text {
+    font-size: 26rpx;
+  }
+  
+  .action-item {
+    padding: 8rpx 12rpx;
+  }
+  
+  .action-icon {
+    font-size: 22rpx;
+  }
+  
+  .action-text {
+    font-size: 20rpx;
+  }
+  
+  .reply-item {
+    padding: 15rpx;
+  }
+  
+  .reply-user {
+    font-size: 22rpx;
+  }
+  
+  .reply-time {
+    font-size: 18rpx;
+  }
+  
+  .reply-text {
+    font-size: 24rpx;
+  }
+}
+
+/* 暗黑模式样式 */
+.dark .comment-item {
+  background-color: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+.dark .comment-item:hover {
+  background-color: var(--gray-700);
+  box-shadow: var(--shadow);
+}
+
+.dark .comment-item:active {
+  background-color: var(--gray-600);
+}
+
+.dark .user-avatar {
+  border-color: var(--border-color);
+}
+
+.dark .user-name {
+  color: var(--text-color);
+}
+
+.dark .comment-time {
+  color: var(--gray-400);
+}
+
+.dark .comment-text {
+  color: var(--text-color);
+}
+
+.dark .comment-actions {
+  border-top-color: var(--border-color);
+}
+
+.dark .action-item:hover {
+  background-color: var(--gray-700);
+}
+
+.dark .action-text {
+  color: var(--gray-400);
+}
+
+.dark .reply-list {
+  border-top-color: var(--border-color);
+}
+
+.dark .reply-item {
+  background-color: var(--gray-700);
+}
+
+.dark .reply-user {
+  color: var(--text-color);
+}
+
+.dark .reply-time {
+  color: var(--gray-400);
+}
+
+.dark .reply-text {
+  color: var(--text-color);
+}
+
+/* 动画效果 */
+.comment-item {
+  animation: fadeInUp 0.3s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 长按效果 */
+.comment-item:active {
+  background-color: var(--gray-200);
+  transform: scale(0.98);
+}
+
+.dark .comment-item:active {
+  background-color: var(--gray-600);
+}
+
+/* 加载状态 */
+.comment-item.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.comment-item.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30rpx;
+  height: 30rpx;
+  border: 3rpx solid var(--border-color);
+  border-top: 3rpx solid var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* 错误状态 */
+.comment-item.error {
+  border-color: var(--danger-color);
+  background-color: rgba(220, 53, 69, 0.05);
+}
+
+.comment-item.error .comment-text {
+  color: var(--danger-color);
+}
+
+/* 高亮状态 */
+.comment-item.highlighted {
+  border-color: var(--primary-color);
+  background-color: rgba(0, 123, 255, 0.05);
+  box-shadow: 0 0 0 2rpx rgba(0, 123, 255, 0.1);
+}
+
+.dark .comment-item.highlighted {
+  background-color: rgba(0, 123, 255, 0.1);
+  box-shadow: 0 0 0 2rpx rgba(0, 123, 255, 0.2);
+}

@@ -1,0 +1,135 @@
+<!--pages/discover/discover.wxml-->
+<view class="container {{isDarkMode ? 'dark' : ''}}">
+  <!-- 标签切换 -->
+  <view class="tab-section">
+    <view class="tab-list">
+      <view 
+        wx:for="{{tabs}}" 
+        wx:key="id"
+        class="tab-item {{currentTab === item.id ? 'active' : ''}}"
+        bindtap="onTabChange"
+        data-tab="{{item.id}}"
+      >
+        <text class="tab-text">{{item.name}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 推荐内容 -->
+  <view class="content-section" wx:if="{{currentTab === 'recommend'}}">
+    <!-- 推荐新闻 -->
+    <view class="section">
+      <view class="section-header">
+        <text class="section-title">为你推荐</text>
+        <text class="section-subtitle">基于你的阅读偏好</text>
+      </view>
+      
+      <view class="recommend-list">
+        <news-card 
+          wx:for="{{recommendedNews}}" 
+          wx:key="id"
+          news="{{item}}"
+          bindtap="onRecommendNewsTap"
+          data-id="{{item.id}}"
+        />
+      </view>
+      
+      <!-- 空状态 -->
+      <view class="empty" wx:if="{{recommendedNews.length === 0 && !loading}}">
+        <view class="empty-icon">🔍</view>
+        <text class="empty-text">暂无推荐内容</text>
+        <text class="empty-desc">多浏览一些新闻，我们会为你推荐更精准的内容</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 热搜内容 -->
+  <view class="content-section" wx:elif="{{currentTab === 'hot'}}">
+    <view class="section">
+      <view class="section-header">
+        <text class="section-title">热搜榜</text>
+        <text class="section-subtitle">实时热点话题</text>
+      </view>
+      
+      <view class="hot-list">
+        <view 
+          wx:for="{{hotSearchList}}" 
+          wx:key="id"
+          class="hot-item"
+          bindtap="onHotSearchTap"
+          data-keyword="{{item.keyword}}"
+        >
+          <view class="hot-rank">
+            <text class="rank-number">{{index + 1}}</text>
+            <text class="hot-icon" wx:if="{{item.hot}}">🔥</text>
+          </view>
+          <view class="hot-content">
+            <text class="hot-keyword">{{item.keyword}}</text>
+            <text class="hot-desc" wx:if="{{item.desc}}">{{item.desc}}</text>
+          </view>
+          <view class="hot-trend">
+            <text class="trend-text" wx:if="{{item.trend}}">{{item.trend}}</text>
+          </view>
+        </view>
+      </view>
+      
+      <!-- 空状态 -->
+      <view class="empty" wx:if="{{hotSearchList.length === 0 && !loading}}">
+        <view class="empty-icon">📈</view>
+        <text class="empty-text">暂无热搜数据</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 专题内容 -->
+  <view class="content-section" wx:elif="{{currentTab === 'topic'}}">
+    <view class="section">
+      <view class="section-header">
+        <text class="section-title">专题推荐</text>
+        <text class="section-subtitle">深度内容专题</text>
+      </view>
+      
+      <view class="topic-grid">
+        <view 
+          wx:for="{{topics}}" 
+          wx:key="id"
+          class="topic-card"
+          bindtap="onTopicTap"
+          data-id="{{item.id}}"
+        >
+          <view class="topic-image">
+            <image 
+              src="{{item.image}}" 
+              mode="aspectFill"
+              lazy-load="{{true}}"
+              class="image"
+            />
+            <view class="topic-overlay">
+              <text class="topic-count">{{item.newsCount}}篇</text>
+            </view>
+          </view>
+          <view class="topic-content">
+            <text class="topic-title">{{item.title}}</text>
+            <text class="topic-desc">{{item.desc || item.description}}</text>
+          </view>
+        </view>
+      </view>
+      
+      <!-- 空状态 -->
+      <view class="empty" wx:if="{{topics.length === 0 && !loading}}">
+        <view class="empty-icon">📚</view>
+        <text class="empty-text">暂无专题内容</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 加载状态 -->
+  <view class="loading" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+
+  <!-- 刷新提示 -->
+  <view class="refresh-tip" wx:if="{{refreshing}}">
+    <text>正在刷新...</text>
+  </view>
+</view>

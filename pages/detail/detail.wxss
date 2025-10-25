@@ -1,0 +1,331 @@
+/* pages/detail/detail.wxss */
+.container {
+  background-color: var(--bg-color);
+  min-height: 100vh;
+}
+
+/* 新闻详情样式 */
+.news-detail {
+  padding: 20rpx;
+}
+
+.news-header {
+  margin-bottom: 30rpx;
+}
+
+.news-title {
+  font-size: 40rpx;
+  font-weight: bold;
+  line-height: 1.4;
+  color: var(--text-color);
+  margin-bottom: 20rpx;
+  display: block;
+}
+
+.news-meta {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+  flex-wrap: wrap;
+}
+
+.news-source {
+  font-size: 24rpx;
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
+.news-time {
+  font-size: 24rpx;
+  color: var(--gray-500);
+}
+
+.news-category {
+  font-size: 20rpx;
+  padding: 6rpx 12rpx;
+}
+
+/* 新闻图片样式 */
+.news-image {
+  margin: 30rpx 0;
+  border-radius: 20rpx;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.news-image .image {
+  width: 100%;
+  max-height: 500rpx;
+}
+
+/* 新闻内容样式 */
+.news-content {
+  margin: 30rpx 0;
+  line-height: 1.8;
+}
+
+.content-text {
+  font-size: 30rpx;
+  color: var(--text-color);
+  line-height: 1.8;
+}
+
+/* 摘要区域样式 */
+.summary-section {
+  background-color: var(--card-bg);
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin: 30rpx 0;
+  border: 1rpx solid var(--border-color);
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+.summary-loading {
+  font-size: 24rpx;
+  color: var(--gray-500);
+}
+
+.summary-content {
+  background-color: var(--gray-100);
+  padding: 20rpx;
+  border-radius: 10rpx;
+  border-left: 4rpx solid var(--primary-color);
+}
+
+.summary-text {
+  font-size: 28rpx;
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+.summary-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx;
+  background-color: var(--gray-100);
+  border-radius: 10rpx;
+  border: 2rpx dashed var(--border-color);
+}
+
+.placeholder-text {
+  font-size: 26rpx;
+  color: var(--gray-500);
+}
+
+/* 操作按钮样式 */
+.action-buttons {
+  display: flex;
+  justify-content: space-around;
+  padding: 30rpx 0;
+  border-top: 1rpx solid var(--border-color);
+  border-bottom: 1rpx solid var(--border-color);
+  margin: 30rpx 0;
+}
+
+.action-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10rpx;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 20rpx;
+  border-radius: 10rpx;
+}
+
+.action-item:hover {
+  background-color: var(--gray-100);
+  transform: translateY(-2rpx);
+}
+
+.action-icon {
+  font-size: 40rpx;
+  transition: all 0.3s ease;
+}
+
+.action-icon.liked {
+  color: var(--danger-color);
+  transform: scale(1.2);
+}
+
+.action-icon.collected {
+  color: var(--warning-color);
+  transform: scale(1.2);
+}
+
+.action-text {
+  font-size: 24rpx;
+  color: var(--text-color);
+}
+
+/* 评论区域样式 */
+.comments-section {
+  margin-top: 40rpx;
+}
+
+.comment-input {
+  background-color: var(--card-bg);
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+  border: 1rpx solid var(--border-color);
+}
+
+.comment-textarea {
+  width: 100%;
+  min-height: 120rpx;
+  padding: 20rpx;
+  background-color: var(--gray-100);
+  border-radius: 10rpx;
+  border: none;
+  font-size: 28rpx;
+  color: var(--text-color);
+  margin-bottom: 20rpx;
+}
+
+.comment-textarea:focus {
+  background-color: var(--white-color);
+  border: 2rpx solid var(--primary-color);
+}
+
+.comment-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.comment-count {
+  font-size: 24rpx;
+  color: var(--gray-500);
+}
+
+/* 评论列表样式 */
+.comments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.load-more-comments {
+  text-align: center;
+  padding: 30rpx;
+}
+
+.no-more-comments {
+  text-align: center;
+  padding: 30rpx;
+  color: var(--gray-500);
+  font-size: 24rpx;
+}
+
+/* 加载状态样式 */
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 120rpx;
+  color: var(--gray-500);
+  font-size: 28rpx;
+}
+
+.loading::before {
+  content: '';
+  width: 40rpx;
+  height: 40rpx;
+  border: 4rpx solid var(--border-color);
+  border-top: 4rpx solid var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-right: 20rpx;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 错误状态样式 */
+.error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 120rpx 40rpx;
+  color: var(--danger-color);
+}
+
+.error-icon {
+  font-size: 120rpx;
+  margin-bottom: 30rpx;
+}
+
+.error-text {
+  font-size: 28rpx;
+  color: var(--danger-color);
+  margin-bottom: 30rpx;
+}
+
+/* 响应式样式 */
+@media (max-width: 750rpx) {
+  .news-title {
+    font-size: 36rpx;
+  }
+  
+  .content-text {
+    font-size: 28rpx;
+  }
+  
+  .action-buttons {
+    padding: 20rpx 0;
+  }
+  
+  .action-item {
+    padding: 15rpx;
+  }
+  
+  .action-icon {
+    font-size: 36rpx;
+  }
+}
+
+/* 暗黑模式样式 */
+.dark .summary-section {
+  background-color: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+.dark .summary-content {
+  background-color: var(--gray-700);
+}
+
+.dark .comment-input {
+  background-color: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+.dark .comment-textarea {
+  background-color: var(--gray-700);
+  color: var(--white-color);
+}
+
+.dark .comment-textarea:focus {
+  background-color: var(--gray-600);
+  border-color: var(--primary-color);
+}
+
+.dark .action-item:hover {
+  background-color: var(--gray-700);
+}

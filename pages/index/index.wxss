@@ -1,0 +1,302 @@
+/* pages/index/index.wxss */
+.container {
+  background-color: var(--bg-color);
+  min-height: 100vh;
+}
+
+/* 搜索栏样式 */
+.search-bar {
+  background-color: var(--card-bg);
+  padding: 20rpx;
+  border-bottom: 1rpx solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.search-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.page-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+.search-icon {
+  width: 60rpx;
+  height: 60rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--gray-200);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.search-icon:hover {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+}
+
+.search-input {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.search-field {
+  flex: 1;
+  height: 70rpx;
+  padding: 0 20rpx;
+  background-color: var(--gray-100);
+  border-radius: 35rpx;
+  border: none;
+  font-size: 28rpx;
+  color: var(--text-color);
+}
+
+.search-field:focus {
+  background-color: var(--white-color);
+  border: 2rpx solid var(--primary-color);
+}
+
+.search-actions {
+  display: flex;
+  gap: 20rpx;
+}
+
+.btn-clear, .btn-cancel {
+  padding: 10rpx 20rpx;
+  font-size: 24rpx;
+  color: var(--primary-color);
+  cursor: pointer;
+}
+
+/* 轮播图样式 */
+.banner-section {
+  margin: 20rpx;
+  border-radius: 20rpx;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.banner-swiper {
+  height: 400rpx;
+}
+
+.banner-item {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+}
+
+.banner-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.banner-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+  padding: 40rpx 30rpx 30rpx;
+  color: var(--white-color);
+}
+
+.banner-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+/* 分类标签样式 */
+.category-section {
+  margin: 20rpx;
+}
+
+.category-scroll {
+  white-space: nowrap;
+}
+
+.category-list {
+  display: flex;
+  gap: 20rpx;
+  padding: 0 20rpx;
+}
+
+.category-item {
+  flex-shrink: 0;
+  padding: 16rpx 32rpx;
+  background-color: var(--gray-100);
+  border-radius: 30rpx;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2rpx solid transparent;
+}
+
+.category-item.active {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  border-color: var(--primary-color);
+}
+
+.category-item:hover {
+  transform: translateY(-2rpx);
+  box-shadow: var(--shadow);
+}
+
+.category-text {
+  font-size: 26rpx;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* 新闻列表样式 */
+.news-section {
+  padding: 0 20rpx;
+}
+
+.news-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+/* 加载状态样式 */
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60rpx;
+  color: var(--gray-500);
+  font-size: 28rpx;
+}
+
+.loading::before {
+  content: '';
+  width: 40rpx;
+  height: 40rpx;
+  border: 4rpx solid var(--border-color);
+  border-top: 4rpx solid var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-right: 20rpx;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 空状态样式 */
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 120rpx 40rpx;
+  color: var(--gray-500);
+}
+
+.empty-icon {
+  font-size: 120rpx;
+  margin-bottom: 30rpx;
+  opacity: 0.5;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: var(--gray-500);
+}
+
+/* 加载更多样式 */
+.load-more {
+  padding: 40rpx;
+  text-align: center;
+}
+
+.no-more {
+  color: var(--gray-500);
+  font-size: 24rpx;
+}
+
+/* 刷新提示样式 */
+.refresh-tip {
+  position: fixed;
+  top: 100rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  padding: 20rpx 40rpx;
+  border-radius: 30rpx;
+  font-size: 24rpx;
+  z-index: 1000;
+  animation: fadeInOut 2s ease-in-out;
+}
+
+@keyframes fadeInOut {
+  0%, 100% { opacity: 0; transform: translateX(-50%) translateY(-20rpx); }
+  50% { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+/* 响应式样式 */
+@media (max-width: 750rpx) {
+  .banner-swiper {
+    height: 300rpx;
+  }
+  
+  .banner-title {
+    font-size: 28rpx;
+  }
+  
+  .category-item {
+    padding: 12rpx 24rpx;
+  }
+  
+  .category-text {
+    font-size: 24rpx;
+  }
+}
+
+/* 暗黑模式样式 */
+.dark .search-bar {
+  background-color: var(--card-bg);
+  border-bottom-color: var(--border-color);
+}
+
+.dark .search-field {
+  background-color: var(--gray-700);
+  color: var(--white-color);
+}
+
+.dark .search-field:focus {
+  background-color: var(--gray-600);
+  border-color: var(--primary-color);
+}
+
+.dark .category-item {
+  background-color: var(--gray-700);
+  color: var(--white-color);
+}
+
+.dark .category-item.active {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+}
+
+.dark .banner-content {
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+}

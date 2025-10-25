@@ -1,0 +1,207 @@
+<!--pages/profile/profile.wxml-->
+<view class="container {{isDarkMode ? 'dark' : ''}}">
+  <!-- 用户信息区域 -->
+  <view class="user-section">
+    <view class="user-info" wx:if="{{isLogin}}">
+      <image class="user-avatar" src="{{userInfo.avatarUrl}}" />
+      <view class="user-details">
+        <text class="user-name">{{userInfo.nickName}}</text>
+        <text class="user-desc">每日热点新闻用户</text>
+      </view>
+      <view class="user-actions">
+        <button class="btn btn-outline btn-small" bindtap="logout">
+          退出登录
+        </button>
+      </view>
+    </view>
+    
+    <view class="login-prompt" wx:else>
+      <view class="login-icon">👤</view>
+      <text class="login-text">登录后享受更多功能</text>
+      <button class="btn btn-primary" bindtap="login">
+        立即登录
+      </button>
+    </view>
+  </view>
+
+  <!-- 统计数据 -->
+  <view class="stats-section" wx:if="{{isLogin}}">
+    <view class="stats-grid">
+      <view class="stat-item">
+        <text class="stat-number">{{stats.viewedCount}}</text>
+        <text class="stat-label">浏览</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-number">{{stats.likedCount}}</text>
+        <text class="stat-label">点赞</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-number">{{stats.commentedCount}}</text>
+        <text class="stat-label">评论</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-number">{{stats.collectedCount}}</text>
+        <text class="stat-label">收藏</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 标签切换 -->
+  <view class="tab-section">
+    <view class="tab-list">
+      <view 
+        wx:for="{{tabs}}" 
+        wx:key="id"
+        class="tab-item {{currentTab === item.id ? 'active' : ''}}"
+        bindtap="onTabChange"
+        data-tab="{{item.id}}"
+      >
+        <text class="tab-text">{{item.name}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 历史记录 -->
+  <view class="content-section" wx:if="{{currentTab === 'history'}}">
+    <view class="section-header">
+      <text class="section-title">浏览历史</text>
+      <text class="section-action" bindtap="clearHistory" wx:if="{{viewedNews.length > 0}}">
+        清除
+      </text>
+    </view>
+    
+    <view class="history-list" wx:if="{{viewedNews.length > 0}}">
+      <news-card 
+        wx:for="{{viewedNews}}" 
+        wx:key="id"
+        news="{{item}}"
+        bindtap="onHistoryNewsTap"
+        data-id="{{item.id}}"
+      />
+    </view>
+    
+    <view class="empty" wx:else>
+      <view class="empty-icon">📖</view>
+      <text class="empty-text">暂无浏览历史</text>
+    </view>
+  </view>
+
+  <!-- 收藏列表 -->
+  <view class="content-section" wx:elif="{{currentTab === 'collect'}}">
+    <view class="section-header">
+      <text class="section-title">我的收藏</text>
+      <text class="section-action" bindtap="clearCollections" wx:if="{{collectedNews.length > 0}}">
+        清除
+      </text>
+    </view>
+    
+    <view class="collect-list" wx:if="{{collectedNews.length > 0}}">
+      <news-card 
+        wx:for="{{collectedNews}}" 
+        wx:key="id"
+        news="{{item}}"
+        bindtap="onCollectedNewsTap"
+        data-id="{{item.id}}"
+      />
+    </view>
+    
+    <view class="empty" wx:else>
+      <view class="empty-icon">⭐</view>
+      <text class="empty-text">暂无收藏内容</text>
+    </view>
+  </view>
+
+  <!-- 设置页面 -->
+  <view class="content-section" wx:elif="{{currentTab === 'settings'}}">
+    <view class="settings-list">
+      <!-- 主题设置 -->
+      <view class="setting-item">
+        <view class="setting-info">
+          <text class="setting-title">暗黑模式</text>
+          <text class="setting-desc">切换明暗主题</text>
+        </view>
+        <switch 
+          checked="{{settings.isDarkMode}}"
+          bindchange="toggleDarkMode"
+          color="{{primary-color}}"
+        />
+      </view>
+
+      <!-- 推送通知 -->
+      <view class="setting-item">
+        <view class="setting-info">
+          <text class="setting-title">推送通知</text>
+          <text class="setting-desc">接收热点新闻推送</text>
+        </view>
+        <switch 
+          checked="{{settings.pushNotification}}"
+          bindchange="togglePushNotification"
+          color="{{primary-color}}"
+        />
+      </view>
+
+      <!-- 自动播放 -->
+      <view class="setting-item">
+        <view class="setting-info">
+          <text class="setting-title">自动播放</text>
+          <text class="setting-desc">视频自动播放</text>
+        </view>
+        <switch 
+          checked="{{settings.autoPlay}}"
+          bindchange="toggleAutoPlay"
+          color="{{primary-color}}"
+        />
+      </view>
+
+      <!-- 字体大小 -->
+      <view class="setting-item">
+        <view class="setting-info">
+          <text class="setting-title">字体大小</text>
+          <text class="setting-desc">调整阅读体验</text>
+        </view>
+        <picker 
+          range="{{['小', '中', '大']}}"
+          range-key=""
+          value="{{settings.fontSize === 'small' ? 0 : settings.fontSize === 'normal' ? 1 : 2}}"
+          bindchange="onFontSizeChange"
+        >
+          <view class="picker-text">
+            {{settings.fontSize === 'small' ? '小' : settings.fontSize === 'normal' ? '中' : '大'}}
+          </view>
+        </picker>
+      </view>
+    </view>
+
+    <!-- 其他功能 -->
+    <view class="function-list">
+      <view class="function-item" bindtap="aboutUs">
+        <text class="function-icon">ℹ️</text>
+        <text class="function-title">关于我们</text>
+        <text class="function-arrow">></text>
+      </view>
+      
+      <view class="function-item" bindtap="feedback">
+        <text class="function-icon">💬</text>
+        <text class="function-title">意见反馈</text>
+        <text class="function-arrow">></text>
+      </view>
+      
+      <view class="function-item" bindtap="privacyPolicy">
+        <text class="function-icon">🔒</text>
+        <text class="function-title">隐私政策</text>
+        <text class="function-arrow">></text>
+      </view>
+      
+      <view class="function-item" bindtap="userAgreement">
+        <text class="function-icon">📄</text>
+        <text class="function-title">用户协议</text>
+        <text class="function-arrow">></text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 加载状态 -->
+  <view class="loading" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+</view>
