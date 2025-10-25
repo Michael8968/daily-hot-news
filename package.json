@@ -1,0 +1,78 @@
+{
+  "name": "daily-hot-news",
+  "version": "1.0.0",
+  "description": "每日热点新闻小程序 - 一个专注于聚合每日国内外热点新闻的微信小程序",
+  "main": "app.js",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "lint": "eslint . --ext .js",
+    "lint:fix": "eslint . --ext .js --fix",
+    "format": "prettier --write \"**/*.{js,json,wxml,wxss}\"",
+    "format:check": "prettier --check \"**/*.{js,json,wxml,wxss}\"",
+    "build": "echo '微信小程序无需构建步骤'",
+    "dev": "echo '请在微信开发者工具中打开项目'",
+    "deploy:functions": "echo '请在微信开发者工具中部署云函数'"
+  },
+  "keywords": [
+    "微信小程序",
+    "新闻聚合",
+    "AI摘要",
+    "个性化推荐",
+    "云开发",
+    "miniprogram",
+    "wechat",
+    "news",
+    "ai"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/daily-hot-news.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/daily-hot-news/issues"
+  },
+  "homepage": "https://github.com/your-username/daily-hot-news#readme",
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "prettier": "^3.2.5",
+    "jest": "^29.7.0",
+    "@babel/core": "^7.23.6",
+    "@babel/preset-env": "^7.23.6",
+    "babel-jest": "^29.7.0"
+  },
+  "dependencies": {},
+  "jest": {
+    "testEnvironment": "node",
+    "testMatch": [
+      "**/tests/**/*.test.js"
+    ],
+    "collectCoverageFrom": [
+      "utils/**/*.js",
+      "components/**/*.js",
+      "!**/node_modules/**"
+    ],
+    "coverageDirectory": "coverage",
+    "coverageReporters": [
+      "text",
+      "lcov",
+      "html"
+    ]
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}

@@ -38,7 +38,7 @@
     "checkInvalidKey": true,
     "checkSiteMap": true,
     "uploadWithSourceMap": true,
-    "compileHotReLoad": false,
+    "compileHotReLoad": true,
     "lazyloadPlaceholderEnable": false,
     "useMultiFrameRuntime": true,
     "useApiHook": true,
@@ -62,7 +62,12 @@
     "localPlugins": false,
     "condition": false,
     "swc": false,
-    "disableSWC": true
+    "disableSWC": true,
+    "ignoreDevUnusedFiles": true,
+    "bigPackageSizeSupport": false,
+    "useStaticServer": false,
+    "useLanDebug": false,
+    "skylineRenderEnable": false
   },
   "compileType": "miniprogram",
   "libVersion": "2.32.3",
