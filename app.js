@@ -1,29 +1,32 @@
 // app.js
 'use strict';
 
+const { getAllEnvConfigAsync, validateEnvConfig, initEnv } = require('./utils/env.js');
+
 App({
   globalData: {
     userInfo: null,
     openid: null,
-    envId: 'your-env-id', // 替换为实际的云开发环境ID
-    newsApiKey: 'your-news-api-key', // 替换为实际的NewsAPI密钥
-    deepSeekApiKey: 'your-deepseek-api-key', // 替换为实际的DeepSeek API密钥
     isDarkMode: false,
-    viewedNews: [] // 用户浏览历史
+    viewedNews: [], // 用户浏览历史
+    config: null // 环境配置
   },
 
   onLaunch() {
     console.log('小程序启动');
-    
+
+    // 初始化环境配置
+    this.initConfig();
+
     // 初始化云开发
     this.initCloud();
-    
+
     // 获取用户信息
     this.getUserInfo();
-    
+
     // 检查网络状态
     this.checkNetworkStatus();
-    
+
     // 获取系统信息
     this.getSystemInfo();
   },
@@ -44,6 +47,44 @@ App({
     });
   },
 
+  // 初始化环境配置
+  async initConfig() {
+    try {
+      // 初始化环境变量
+      await initEnv();
+
+      // 获取环境配置
+      this.globalData.config = await getAllEnvConfigAsync();
+
+      // 验证配置
+      const validation = validateEnvConfig();
+      if (!validation.isValid) {
+        console.warn('环境配置不完整，缺少:', validation.missing);
+
+        // 在开发环境下显示警告
+        if (this.globalData.config.isDev) {
+          wx.showModal({
+            title: '配置警告',
+            content: `缺少以下配置: ${validation.missing.join(', ')}`,
+            showCancel: false
+          });
+        }
+      }
+
+      console.log('环境配置已加载:', this.globalData.config);
+    } catch (error) {
+      console.error('初始化环境配置失败:', error);
+      // 使用默认配置
+      this.globalData.config = {
+        cloudEnvId: 'your-env-id',
+        newsApiKey: 'your-news-api-key',
+        deepSeekApiKey: 'your-deepseek-api-key',
+        isDev: true,
+        isDebug: true
+      };
+    }
+  },
+
   // 初始化云开发
   initCloud() {
     if (!wx.cloud) {
@@ -51,10 +92,13 @@ App({
       return;
     }
 
+    const envId = this.globalData.config?.cloudEnvId || 'your-env-id';
     wx.cloud.init({
-      env: this.globalData.envId,
+      env: envId,
       traceUser: true
     });
+
+    console.log('云开发已初始化，环境ID:', envId);
   },
 
   // 获取用户信息
@@ -129,7 +173,7 @@ App({
   toggleDarkMode() {
     this.globalData.isDarkMode = !this.globalData.isDarkMode;
     wx.setStorageSync('isDarkMode', this.globalData.isDarkMode);
-    
+
     // 触发页面更新
     const pages = getCurrentPages();
     const currentPage = pages[pages.length - 1];
@@ -146,13 +190,44 @@ App({
       timestamp: Date.now(),
       openid: this.globalData.openid
     };
-    
+
     // 本地存储
     const actions = wx.getStorageSync('userActions') || [];
     actions.push(userAction);
     wx.setStorageSync('userActions', actions);
-    
+
     // 上报分析数据
     wx.reportAnalytics(action, data);
+  },
+
+  // 获取配置值
+  getConfig(key, defaultValue = null) {
+    return this.globalData.config?.[key] || defaultValue;
+  },
+
+  // 获取API配置
+  getApiConfig() {
+    return {
+      newsApiKey: this.getConfig('newsApiKey'),
+      newsApiBaseUrl: this.getConfig('newsApiBaseUrl'),
+      deepSeekApiKey: this.getConfig('deepSeekApiKey'),
+      deepSeekApiBaseUrl: this.getConfig('deepSeekApiBaseUrl'),
+      requestTimeout: this.getConfig('requestTimeout', 10000)
+    };
+  },
+
+  // 检查是否为开发环境
+  isDevelopment() {
+    return this.getConfig('isDev', false);
+  },
+
+  // 检查是否启用调试
+  isDebugEnabled() {
+    return this.getConfig('isDebug', false);
+  },
+
+  // 获取日志级别
+  getLogLevel() {
+    return this.getConfig('logLevel', 'info');
   }
 });
