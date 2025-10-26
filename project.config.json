@@ -70,7 +70,7 @@
     "skylineRenderEnable": false
   },
   "compileType": "miniprogram",
-  "libVersion": "2.32.3",
+  "libVersion": "3.10.3",
   "appid": "wx55839e1f90d3837f",
   "projectname": "daily-hot-news",
   "isGameTourist": false,
